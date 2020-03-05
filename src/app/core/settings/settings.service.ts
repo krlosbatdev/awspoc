@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable()
 export class SettingsService {
-
   public user: any;
   public app: any;
   private layout: any;
@@ -11,7 +10,6 @@ export class SettingsService {
   public token: any;
 
   constructor() {
-
     // // User Settings
     // // -----------------------------------
     // this.user = {
@@ -31,29 +29,28 @@ export class SettingsService {
     // User Settings
     // -----------------------------------
     this.user = {
-      name: 'Link ',
-      email: 'link@bankunited.com ',
-      department: '',
-      officerId: '123',
-      role: 'Loan Officer',
-      picture: 'assets/img/user/02.jpg',
+      name: "Mia",
+      email: "mia@bankunited.com",
+      department: "",
+      officerId: "123",
+      role: "Loan Officer",
+      picture: "assets/img/user/01.jpg"
     };
 
     // App Settings
     // -----------------------------------
     this.app = {
-      name: '',
-      description: '',
-      year: ((new Date()).getFullYear()),
-      env: 'dev'
+      name: "",
+      description: "",
+      year: new Date().getFullYear(),
+      env: "dev"
     };
 
     //TODO: refactor
     if (this.app.env === "dev") {
-      this.baseUrl = 'http://localhost:45211/';
-    }
-    else {
-      this.baseUrl = '/server/';
+      this.baseUrl = "http://localhost:45211/";
+    } else {
+      this.baseUrl = "/server/";
     }
 
     // Layout Settings
@@ -73,9 +70,8 @@ export class SettingsService {
       hiddenFooter: false,
       offsidebarOpen: false,
       asideToggled: false,
-      viewAnimation: 'ng-fadeInUp'
+      viewAnimation: "ng-fadeInUp"
     };
-
   }
 
   getAppSetting(name) {
@@ -89,23 +85,22 @@ export class SettingsService {
   }
 
   setAppSetting(name, value) {
-    if (typeof this.app[name] !== 'undefined') {
+    if (typeof this.app[name] !== "undefined") {
       this.app[name] = value;
     }
   }
   setUserSetting(name, value) {
-    if (typeof this.user[name] !== 'undefined') {
+    if (typeof this.user[name] !== "undefined") {
       this.user[name] = value;
     }
   }
   setLayoutSetting(name, value) {
-    if (typeof this.layout[name] !== 'undefined') {
-      return this.layout[name] = value;
+    if (typeof this.layout[name] !== "undefined") {
+      return (this.layout[name] = value);
     }
   }
 
   toggleLayoutSetting(name) {
     return this.setLayoutSetting(name, !this.getLayoutSetting(name));
   }
-
 }
