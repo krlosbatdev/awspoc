@@ -1,0 +1,32 @@
+/**
+  This file contains the custom styles for the application use
+*/
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-left {
+  text-align: left;
+}
+
+//Sweet Alerts
+.swal-footer {
+  text-align: center;
+}
+
+//Modal
+.modal-header,
+.modal-footer {
+  display: block !important;
+}
+
+//Devextreme
+.dx-datagrid-content .dx-datagrid-table .dx-row > td,
+.dx-datagrid-content .dx-datagrid-table .dx-row > tr > td {
+  vertical-align: middle;
+}

@@ -1,0 +1,42 @@
+<div class="content-heading">
+  <div class="col-md-6"> Users
+    <small>User Access Table</small>
+    </div>
+  <div class="col-md-6 align-right">
+    <button class="btn btn-sm btn-info" type="button" (click)="addEditUser()">Add User</button>
+  </div>
+</div>
+
+<div class="card card-default">
+  <div class="card-header">
+  </div>
+  <div class="card-body">
+
+    <dx-data-grid [dataSource]="users" [showBorders]="true" [rowAlternationEnabled]="true" [columnAutoWidth]="true">
+
+      <dxo-selection [mode]="single"></dxo-selection>
+      <dxo-sorting [mode]="multiple"></dxo-sorting>
+      <dxo-scrolling [mode]="standard"></dxo-scrolling>
+      <dxo-filter-row [visible]="true"></dxo-filter-row>
+      <dxo-paging [pageSize]="5"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 15, 20]" [showInfo]="true" [visible]="true"></dxo-pager>
+
+      <dxi-column dataField="officerId" caption="Officer Id" width="5%"></dxi-column>
+      <dxi-column dataField="fullName" caption="Full Name"></dxi-column>
+      <dxi-column dataField="role.roleName" caption="Role Name"></dxi-column>
+      <dxi-column caption="Action" cellTemplate="actionTemplate" width="10%" alignment="center"></dxi-column>
+
+      <div *dxTemplate="let row of 'actionTemplate'">
+        <div class="list-icon d-inline-flex">
+          <div class="mr-3" (click)="addEditUser(row.data.officerId)" title="Edit Client">
+            <em class="fa-2x far fa-edit text-info"></em>
+          </div>
+          <div (click)="removeUser(row.data.officerId)" title="Remove Client">
+            <em class="fa-2x far fa-trash-alt text-danger"></em>
+          </div>
+        </div>
+      </div>
+    </dx-data-grid>
+  </div>
+</div>
+
