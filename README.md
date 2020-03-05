@@ -1,3 +1,6 @@
+# aws
+https://docs.aws.amazon.com/textract/latest/dg/other-examples.html
+
 # Ng2angle
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0.
