@@ -36,6 +36,7 @@
     "angular-tree-component": "8.0.0",
     "angular2-text-mask": "9.0.0",
     "angular2-toaster": "7.0.0",
+    "aws-sdk": "^2.644.0",
     "bootstrap": "4.3.1",
     "chart.js": "2.7.3",
     "classlist.js": "1.1.20150312",
