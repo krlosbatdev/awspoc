@@ -25,7 +25,7 @@ class DocumentProcessor:
 
     def main(self, bucketName, documentName):
         #TODO - Change role arn to environment variable
-        self.roleArn = 'arn:aws:iam::738680470442:role/Lambda_S3toTextract'
+        self.roleArn = 'arn:aws:iam::124744339772:role/service-role/TextractS3-role-iars313u'
 
         self.bucket = bucketName
         self.document = documentName
@@ -49,8 +49,7 @@ class DocumentProcessor:
 
         if self.processType == ProcessType.ANALYSIS:
             response = self.textract.start_document_analysis(DocumentLocation={'S3Object': {'Bucket': self.bucket, 'Name': self.document}},
-                                                             FeatureTypes=[
-                                                                 "TABLES", "FORMS"],
+                                                             FeatureTypes=["TABLES", "FORMS"],
                                                              NotificationChannel={'RoleArn': self.roleArn, 'SNSTopicArn': self.snsTopicArn})
             print('Processing type: Analysis')
             validType = True
@@ -142,28 +141,28 @@ class DocumentProcessor:
 
         # Authorize SNS to write SQS queue
         policy = """{{
-  "Version":"2012-10-17",
-  "Statement":[
-    {{
-      "Sid":"MyPolicy",
-      "Effect":"Allow",
-      "Principal" : {{"AWS" : "*"}},
-      "Action":"SQS:SendMessage",
-      "Resource": "{}",
-      "Condition":{{
-        "ArnEquals":{{
-          "aws:SourceArn": "{}"
-        }}
-      }}
-    }}
-  ]
-}}""".format(sqsQueueArn, self.snsTopicArn)
+            "Version":"2012-10-17",
+            "Statement":[
+                {{
+                "Sid":"MyPolicy",
+                "Effect":"Allow",
+                "Principal" : {{"AWS" : "*"}},
+                "Action":"SQS:SendMessage",
+                "Resource": "{}",
+                "Condition":{{
+                    "ArnEquals":{{
+                    "aws:SourceArn": "{}"
+                    }}
+                }}
+                }}
+            ]
+            }}""".format(sqsQueueArn, self.snsTopicArn)
 
         response = self.sqs.set_queue_attributes(
-            QueueUrl=self.sqsQueueUrl,
-            Attributes={
-                'Policy': policy
-            })
+                        QueueUrl=self.sqsQueueUrl,
+                        Attributes={
+                            'Policy': policy
+                        })
 
     def DeleteTopicandQueue(self):
         self.sqs.delete_queue(QueueUrl=self.sqsQueueUrl)
@@ -213,13 +212,13 @@ class DocumentProcessor:
 
 def lambda_handler(event, context):
     analyzer = DocumentProcessor()
-    
+
     # Get the object from the event and show its content type
     bucket = event['Records'][0]['s3']['bucket']['name']
     key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'], encoding='utf-8')
     try:
         analyzer.main(bucket, key)
-        
+
         return 'Processing Done!'
 
     except Exception as e:

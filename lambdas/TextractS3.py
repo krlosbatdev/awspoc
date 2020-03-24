@@ -59,8 +59,8 @@ def getJobResults(jobId):
 
 def lambda_handler(event, context):
     # Document
-    s3BucketName = "csw-lambda-textract"
-    documentName = "Amazon-Leadership-Principles.pdf"
+    s3BucketName = "texttractpoc"
+    documentName = "insulation.coupon.pdf"
 
     jobId = startJob(s3BucketName, documentName)
     print("Started job with id: {}".format(jobId))
