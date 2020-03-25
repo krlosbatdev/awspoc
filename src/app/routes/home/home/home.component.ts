@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import * as S3 from "aws-sdk/clients/s3";
+const swal = require("sweetalert");
 
 const URL = "https://texttractpoc.s3.us-west-2.amazonaws.com";
 
@@ -13,6 +14,8 @@ export class HomeComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  sweetalertDemo3() {}
 
   upload() {
     const file = this.selectedFiles.item(0);
@@ -43,6 +46,11 @@ export class HomeComponent implements OnInit {
         return false;
       }
       console.log("Successfully uploaded file.", data);
+      swal(
+        "The file has been uploaded!",
+        "You will be notified when the extracted data is ready.",
+        "success"
+      );
       return true;
     });
     //for upload progress
